@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejemplo de formulario y su validación</title>
+    <script src="./js/validarformulario.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form name="formulario" method="post" id="formulario" onsubmit="return validar(this)">
+            <label for="nombre">nombre:
+            </label>
+            <br>
+            <input type="text" name="nombre" id="nombre" placeholder="porfavor escriba aqui su nombre">
+            <br>
+                        <label for="edad">edad:
+
+            </label>
+            <br>
+            <input type="number" name="edad" id="edad" placeholder="porfavor escriba aqui su edad">
+            <br>
+            <label for="email">email:
+            </label>
+            <br>
+            <input type="email" name="email" id="email" placeholder="porfavor escriba aqui su correo electronico">
+            <br>
+                        <label for="email">email:
+            <input type="submit" name="enviar" value="enviar registro">
+            <br>
+            <input type="reset" name="borrar" value="borrar datos">
+
+
+
+        </form>
+        <div class="form-container">
+            <p>todos los formularios que hay en internet tienen metodods de programacion por defecto.estos metodos nos sirven para poder hacer las acciones principales como son:
+                acciones para poderse conectar con los servidores a traves de las arquitecturas cliente servidor vamos a tener por defecto que todos los formularios utilizan el metodo get y el segundo metodo principal es post aunque existen otros metodos que se encargan del intercambio de informacion
+                Get este metodo envia por mediom de la url toda la informacion del formulario a traves del navegador su funcion principal es obtener los datos del servicio pero es el metodo mas vulnerable de todos derivado de que se pueden generar inyecciones de codigo
+                Post este metodo se encarga de registrar una nueva entrada al sistema tambien utiliza la url como envio por defecto pero su facultad es poder ocultarla eso significa que los datos no son visibles para el usuario comun en el navegador 
+            </p>
+        </div>
+    </div>
+    
+</body>
+</html>
