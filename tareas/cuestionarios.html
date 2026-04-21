@@ -4,57 +4,392 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ejercicios-cuestionarios</title>
-    <link rel="stylesheet" href="cuestionarios.css">
+    <link rel="stylesheet" href="../4IV8_Sandoval_Solis_Leonel/01PrimeraPractica/css/style.css">
 </head>
 <body>
     <h1>Ejercicios</h1>
+<a href="../4IV8_Sandoval_Solis_Leonel/index.html">volver a pagina principal</a>
 
-<h2>1) Inversión</h2>
-<input type="text" id="capital" placeholder="Capital">
-<div id="error1" class="mensaje"></div>
-<button onclick="calcularInversion()">Calcular</button>
-<div id="res1" class="resultado"></div>
+<div class="ejercicio">
+<form>
 
-<h2>2) Sueldo</h2>
-<input type="text" id="sueldo" placeholder="Sueldo base">
-<input type="text" id="v1" placeholder="Venta 1">
-<input type="text" id="v2" placeholder="Venta 2">
-<input type="text" id="v3" placeholder="Venta 3">
-<div id="error2" class="mensaje"></div>
-<button onclick="calcularSueldo()">Calcular</button>
-<div id="res2" class="resultado"></div>
+<table>
+
+<tr>
+<td colspan="2">
+<b>1) Calcular inversión con interés mensual (2%)</b>
+</td>
+</tr>
+
+<tr>
+<td>
+Cantidad a invertir:
+</td>
+<td>
+<input type="text"
+id="cantidad1"
+onkeypress="return validarn(event)">
+</td>
+</tr>
+
+<tr>
+<td>Meses de inversión:</td>
+<td>
+<input type="text"
+id="meses1"
+onkeypress="return validarn(event)"
+>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Calcular"
+onclick="interes()">
+</td>
+</tr>
+
+<tr>
+<td>Total final:</td>
+<td>
+<input type="text"
+id="res1"
+readonly
+>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Borrar"
+onclick="borrar1()"
+>
+</td>
+</tr>
+
+</table>
+
+</form>
+</div>
 
 
-<h2>3) Descuento</h2>
-<input type="text" id="compra" placeholder="Total compra">
-<div id="error3" class="mensaje"></div>
-<button onclick="calcularDescuento()">Calcular</button>
-<div id="res3" class="resultado"></div>
+<div class="ejercicio">
+<form>
+<table>
+
+<tr>
+<td colspan="2">
+<b>2) Calcular sueldo con comisiones (10%)</b>
+</td>
+</tr>
+
+<tr>
+<td>Sueldo base:</td>
+<td>
+<input type="text"
+id="sueldo"
+onkeypress="return validarn(event)">
+</td>
+</tr>
+
+<tr>
+<td>Venta 1:</td>
+<td>
+<input type="text"
+id="v1"
+onkeypress="return validarn(event)">
+</td>
+</tr>
+
+<tr>
+<td>Venta 2:</td>
+<td>
+<input type="text"
+id="v2"
+onkeypress="return validarn(event)">
+</td>
+</tr>
+
+<tr>
+<td>Venta 3:</td>
+<td>
+<input type="text"
+id="v3"
+onkeypress="return validarn(event)">
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Calcular"
+onclick="sueldoTotal()"
+>
+</td>
+</tr>
+
+<tr>
+<td>Total:</td>
+<td>
+<input type="text"
+id="res2"
+readonly>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Borrar"
+onclick="borrar2()">
+</td>
+</tr>
+
+</table>
+</form>
+</div>
 
 
-<h2>4) Calificación</h2>
-<input type="number" id="parcial" placeholder="Promedio parciales" min="0" max="10" step="0.1">
-<input type="number" id="examen" placeholder="Examen" min="0" max="10" step="0.1">
-<input type="number" id="trabajo" placeholder="Trabajo" min="0" max="10" step="0.1">
-<div id="error4" class="mensaje"></div>
-<button onclick="calcularCalificacion()">Calcular</button>
-<div id="res4" class="resultado"></div>
+<div class="ejercicio">
+<form>
+
+<table>
+
+<tr>
+<td colspan="2">
+<b>3) Calcular total con descuento del 15%</b>
+</td>
+</tr>
+
+<tr>
+<td>Total compra:</td>
+<td>
+<input type="text"
+id="compra"
+onkeypress="return validarn(event)">
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Calcular"
+onclick="descuento()">
+</td>
+</tr>
+
+<tr>
+<td>Total a pagar:</td>
+<td>
+<input type="text"
+id="res3"
+readonly
+>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Borrar"
+onclick="borrar3()"
+>
+</td>
+</tr>
+
+</table>
+</form>
+</div>
 
 
-<h2>5) Porcentaje</h2>
-<input type="text" id="hombres" placeholder="Hombres">
-<input type="text" id="mujeres" placeholder="Mujeres">
-<div id="error5" class="mensaje"></div>
-<button onclick="calcularPorcentaje()">Calcular</button>
-<div id="res5" class="resultado"></div>
+<div class="ejercicio">
+<form>
+<table>
+
+<tr>
+<td colspan="2">
+<b>4) Calcular calificación final</b>
+</td>
+</tr>
+
+<tr>
+<td>Parciales (0-10):</td>
+<td>
+<input type="text"
+id="parcial"
+onkeypress="return validarn(event)">
+</td>
+</tr>
+
+<tr>
+<td>Examen (0-10):</td>
+<td>
+<input type="text"
+id="examen"
+onkeypress="return validarn(event)">
+</td>
+</tr>
+
+<tr>
+<td>Trabajo (0-10):</td>
+<td>
+<input type="text"
+id="trabajo"
+onkeypress="return validarn(event)"
+>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Calcular"
+onclick="calificacion()">
+</td>
+</tr>
+
+<tr>
+<td>Calificación final:</td>
+<td>
+<input type="text"
+id="res4"
+readonly>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Borrar"
+onclick="borrar4()">
+</td>
+</tr>
+
+</table>
+</form>
+</div>
 
 
-<h2>6) Edad</h2>
+<div class="ejercicio">
+<form>
+<table>
 
-<input type="date" id="fechaNacimiento" min="1900-01-01" max="2018-12-31">
-<div id="error6" class="mensaje"></div>
-<button onclick="calcularEdad()">Calcular</button>
-<div id="res6" class="resultado"></div>
+<tr>
+<td colspan="2">
+<b>5) Calcular porcentaje de hombres y mujeres</b>
+</td>
+</tr>
+
+<tr>
+<td>Hombres:</td>
+<td>
+<input type="text"
+id="hombres"
+onkeypress="return validarn(event)">
+</td>
+</tr>
+
+<tr>
+<td>Mujeres:</td>
+<td>
+<input type="text"
+id="mujeres"
+onkeypress="return validarn(event)">
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Calcular"
+onclick="porcentaje()"
+>
+</td>
+</tr>
+
+<tr>
+<td>Resultado:</td>
+<td>
+<input type="text"
+id="res5"
+readonly>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Borrar"
+onclick="borrar5()">
+</td>
+</tr>
+
+</table>
+</form>
+</div>
+
+
+<div class="ejercicio">
+<form>
+<table>
+
+<tr>
+<td colspan="2">
+<b>6) Calcular edad (entre 8 y 120 años)</b>
+</td>
+</tr>
+
+<tr>
+<td>Fecha nacimiento:</td>
+<td>
+<input type="date"
+id="fecha">
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Calcular"
+onclick="edad()">
+</td>
+</tr>
+
+<tr>
+<td>Edad:</td>
+<td>
+<input type="text"
+id="res6"
+readonly>
+</td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<input type="button"
+value="Borrar"
+onclick="borrar6()"
+>
+</td>
+</tr>
+
+</table>
+</form>
+</div>
 
 <script src="cuestionarios.js"></script>
 </body>

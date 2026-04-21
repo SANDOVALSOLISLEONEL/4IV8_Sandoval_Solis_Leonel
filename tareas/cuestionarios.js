@@ -1,137 +1,69 @@
-function esNumero(valor, input, errorDiv) {
-    if (valor === "" || isNaN(valor)) {
-        input.classList.add("error");
-        errorDiv.innerText = "Solo debes introducir números";
-        return false;
-    } else {
-        input.classList.remove("error");
-        errorDiv.innerText = "";
-        return true;
-    }
+function validarn(e){
+    let tecla = e.key;
+    return /[0-9.]/.test(tecla) || tecla === "Backspace";
 }
 
 // 1
-function calcularInversion() {
-    let input = document.getElementById("capital");
-    let error = document.getElementById("error1");
-
-    if (!esNumero(input.value, input, error)) return;
-
-    let capital = parseFloat(input.value);
-    let ganancia = capital * 0.02;
-
-    document.getElementById("res1").innerText = "Ganancia: $" + ganancia.toFixed(2);
+function interes(){
+    let v = document.getElementById('cantidad1').value;
+    if(v=="" || isNaN(v)) return alert("Solo números");
+    let total = parseFloat(v) * 1.10;
+    document.getElementById('res1').value = "$ " + total.toFixed(2);
+}
+function borrar1(){
+    cantidad1.value=""; res1.value="";
 }
 
 // 2
-function calcularSueldo() {
-    let s = document.getElementById("sueldo");
-    let v1 = document.getElementById("v1");
-    let v2 = document.getElementById("v2");
-    let v3 = document.getElementById("v3");
-    let error = document.getElementById("error2");
-
-    if (!esNumero(s.value, s, error) ||
-        !esNumero(v1.value, v1, error) ||
-        !esNumero(v2.value, v2, error) ||
-        !esNumero(v3.value, v3, error)) return;
-
-    let totalVentas = parseFloat(v1.value) + parseFloat(v2.value) + parseFloat(v3.value);
-    let comision = totalVentas * 0.10;
-    let total = parseFloat(s.value) + comision;
-
-    document.getElementById("res2").innerText = "Total: $" + total.toFixed(2);
+function sueldoTotal(){
+    let s=v1=v2=v3=0;
+    s = sueldo.value; v1=v1.value; v2=v2.value; v3=v3.value;
+    if([s,v1,v2,v3].some(x=>x==""||isNaN(x))) return alert("Solo números");
+    let total = parseFloat(s) + ((v1*1+v2*1+v3*1)*0.10);
+    res2.value="$ "+total.toFixed(2);
 }
+function borrar2(){sueldo.value=v1.value=v2.value=v3.value=res2.value="";}
 
 // 3
-function calcularDescuento() {
-    let input = document.getElementById("compra");
-    let error = document.getElementById("error3");
-
-    if (!esNumero(input.value, input, error)) return;
-
-    let total = parseFloat(input.value);
-    let final = total - (total * 0.15);
-
-    document.getElementById("res3").innerText = "Total a pagar: $" + final.toFixed(2);
+function descuento(){
+    let c = compra.value;
+    if(c==""||isNaN(c)) return alert("Solo números");
+    let total = c - (c*0.15);
+    res3.value="$ "+total.toFixed(2);
 }
+function borrar3(){compra.value=res3.value="";}
 
 // 4
-function calcularCalificacion() {
-    let p = document.getElementById("parcial");
-    let e = document.getElementById("examen");
-    let t = document.getElementById("trabajo");
-    let error = document.getElementById("error4");
-
-    if (!validarRango10(p.value, p, error) ||
-    !validarRango10(e.value, e, error) ||
-    !validarRango10(t.value, t, error)) return;
-    
-    function validarRango10(valor, input, errorDiv) {
-    if (valor === "" || isNaN(valor) || valor < 0 || valor > 10) {
-        input.classList.add("error");
-        errorDiv.innerText = "Ingresa un número entre 0 y 10";
-        return false;
-    } else {
-        input.classList.remove("error");
-        errorDiv.innerText = "";
-        return true;
-    }
+function calificacion(){
+    let p=parcial.value, e=examen.value, t=trabajo.value;
+    if([p,e,t].some(x=>x==""||isNaN(x)||x<0||x>10)) return alert("0-10");
+    let f = (p*0.55)+(e*0.30)+(t*0.15);
+    res4.value=f.toFixed(2);
 }
-
-    let final = (p.value * 0.55) + (e.value * 0.30) + (t.value * 0.15);
-
-    document.getElementById("res4").innerText = "Calificación final: " + final.toFixed(2);
-}
+function borrar4(){parcial.value=examen.value=trabajo.value=res4.value="";}
 
 // 5
-function calcularPorcentaje() {
-    let h = document.getElementById("hombres");
-    let m = document.getElementById("mujeres");
-    let error = document.getElementById("error5");
-
-    if (!esNumero(h.value, h, error) ||
-        !esNumero(m.value, m, error)) return;
-
-    let total = parseFloat(h.value) + parseFloat(m.value);
-    let ph = (h.value / total) * 100;
-    let pm = (m.value / total) * 100;
-
-    document.getElementById("res5").innerText =
-        "Hombres: " + ph.toFixed(2) + "% | Mujeres: " + pm.toFixed(2) + "%";
+function porcentaje(){
+    let h=hombres.value, m=mujeres.value;
+    if([h,m].some(x=>x==""||isNaN(x))) return alert("Solo números");
+    let total = h*1 + m*1;
+    res5.value = "H:"+((h/total)*100).toFixed(1)+"% M:"+((m/total)*100).toFixed(1)+"%";
 }
+function borrar5(){hombres.value=mujeres.value=res5.value="";}
 
 // 6
-function calcularEdad() {
-    let input = document.getElementById("fechaNacimiento");
-    let error = document.getElementById("error6");
+function edad(){
+    let f = new Date(fecha.value);
+    if(fecha.value=="") return alert("Selecciona fecha");
 
-    if (input.value === "") {
-        input.classList.add("error");
-        error.innerText = "Selecciona una fecha";
-        return;
-    }
-
-    let fechaNac = new Date(input.value);
     let hoy = new Date();
+    let edad = hoy.getFullYear()-f.getFullYear();
 
-    let edad = hoy.getFullYear() - fechaNac.getFullYear();
+    let m = hoy.getMonth()-f.getMonth();
+    if(m<0 || (m===0 && hoy.getDate()<f.getDate())) edad--;
 
-    let mes = hoy.getMonth() - fechaNac.getMonth();
-    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNac.getDate())) {
-        edad--;
-    }
+    if(edad<8 || edad>120) return alert("Edad 8-120");
 
-    //  VALIDACIÓN 8 - 120
-    if (edad < 8 || edad > 120) {
-        input.classList.add("error");
-        error.innerText = "La edad debe estar entre 8 y 120 años";
-        document.getElementById("res6").innerText = "";
-        return;
-    }
-
-    input.classList.remove("error");
-    error.innerText = "";
-
-    document.getElementById("res6").innerText = "Edad: " + edad + " años";
+    res6.value=edad+" años";
 }
+function borrar6(){fecha.value=res6.value="";}
