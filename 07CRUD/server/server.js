@@ -128,9 +128,11 @@ const db = mysql.createPool({
     password: 'lss070909',
     database: 'pnt_practica1'
 });
+module.exports = pool.promise();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, () =>
     console.log(`Servidor iniciado en http://localhost:${PORT}`));
+
