@@ -27,6 +27,7 @@ const apiMetodo = document.getElementById('api-metodo');
 const apiUrl = document.getElementById('api-url');
 const apiCodigo = document.getElementById('api-codigo');
 const notificacionDiv = document.getElementById('notificacion');
+const API_BASE = 'http://127.0.0.1:3000';
 
 // Fetch wrapper con logging (evolución de P2)
 async function fetchAPI(url, opciones = {}) {
@@ -612,7 +613,6 @@ if (seccion === 'fortnite') {
 }
 }
 
-
 // ============================================================
 // MÓDULO DE FORTNITE
 // ============================================================
@@ -624,10 +624,13 @@ const inputJugadorNivel = document.getElementById('jugador-nivel');
 const tbodyJugadores = document.getElementById('tbody-jugadores');
 
 const formPartida = document.getElementById('form-partida');
+const inputPartidaId = document.getElementById('partida-id');
 const selectPartidaJugador = document.getElementById('partida-jugador');
 const inputPartidaEliminaciones = document.getElementById('partida-eliminaciones');
 const selectPartidaVictoria = document.getElementById('partida-victoria');
 const tbodyPartidas = document.getElementById('tbody-partidas');
+
+// ==================== JUGADORES ====================
 
 async function cargarJugadores() {
 
@@ -636,6 +639,18 @@ async function cargarJugadores() {
         const resp = await fetchAPI('/api/fortnite/jugadores');
 
         tbodyJugadores.innerHTML = '';
+
+        if (resp.data.length === 0) {
+
+            tbodyJugadores.innerHTML = `
+                <tr>
+                    <td colspan="4">No hay jugadores registrados</td>
+                </tr>
+            `;
+
+            cargarSelectJugadores();
+            return;
+        }
 
         resp.data.forEach(j => {
 
@@ -686,8 +701,7 @@ async function cargarSelectJugadores() {
             const option = document.createElement('option');
 
             option.value = j.id;
-            option.textContent =
-                `${j.nombre} (Nivel ${j.nivel})`;
+            option.textContent = `${j.nombre} (Nivel ${j.nivel})`;
 
             selectPartidaJugador.appendChild(option);
 
@@ -748,6 +762,17 @@ formJugador.addEventListener('submit', async (e) => {
 
     e.preventDefault();
 
+    if (
+        !inputJugadorNombre.value.trim() ||
+        !inputJugadorNivel.value
+    ) {
+        mostrarNotificacion(
+            'Completa todos los campos',
+            'error'
+        );
+        return;
+    }
+
     const datos = {
 
         nombre : inputJugadorNombre.value.trim(),
@@ -770,6 +795,11 @@ formJugador.addEventListener('submit', async (e) => {
                 }
             );
 
+            mostrarNotificacion(
+                'Jugador actualizado',
+                'exito'
+            );
+
         } else {
 
             await fetchAPI(
@@ -783,10 +813,15 @@ formJugador.addEventListener('submit', async (e) => {
                 }
             );
 
+            mostrarNotificacion(
+                'Jugador creado',
+                'exito'
+            );
+
         }
 
         formJugador.reset();
-        inputJugadorId.value='';
+        inputJugadorId.value = '';
 
         cargarJugadores();
 
@@ -798,6 +833,8 @@ formJugador.addEventListener('submit', async (e) => {
 
 });
 
+// ==================== PARTIDAS ====================
+
 async function cargarPartidas() {
 
     try {
@@ -806,6 +843,19 @@ async function cargarPartidas() {
             await fetchAPI('/api/fortnite/partidas');
 
         tbodyPartidas.innerHTML='';
+
+        if(resp.data.length === 0){
+
+            tbodyPartidas.innerHTML = `
+                <tr>
+                    <td colspan="5">
+                        No hay partidas registradas
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
 
         resp.data.forEach(p => {
 
@@ -818,6 +868,11 @@ async function cargarPartidas() {
                 <td>${p.eliminaciones}</td>
                 <td>${p.victoria ? 'Sí' : 'No'}</td>
                 <td>
+                    <button class="btn-editar"
+                        onclick="editarPartida(${p.id})">
+                        Editar
+                    </button>
+
                     <button class="btn-eliminar"
                         onclick="eliminarPartida(${p.id})">
                         Eliminar
@@ -859,17 +914,30 @@ async function eliminarPartida(id){
     }
 
 }
+
 async function editarPartida(id){
 
-    const resp = await fetchAPI('/api/fortnite/partidas');
+    try {
 
-    const partida = resp.data.find(p => p.id == id);
+        const resp = await fetchAPI('/api/fortnite/partidas');
 
-    if(!partida) return;
+        const partida = resp.data.find(
+            p => p.id == id
+        );
 
-    selectPartidaJugador.value = partida.jugador_id;
-    inputPartidaEliminaciones.value = partida.eliminaciones;
-    selectPartidaVictoria.value = partida.victoria ? 'true' : 'false';
+        if(!partida) return;
+
+        inputPartidaId.value = partida.id;
+        selectPartidaJugador.value = partida.jugador_id;
+        inputPartidaEliminaciones.value = partida.eliminaciones;
+        selectPartidaVictoria.value =
+            partida.victoria ? 'true' : 'false';
+
+    } catch(error){
+
+        mostrarNotificacion(error.message,'error');
+
+    }
 
 }
 
@@ -877,29 +945,74 @@ formPartida.addEventListener('submit', async (e)=>{
 
     e.preventDefault();
 
-    try {
+    if (
+        !selectPartidaJugador.value ||
+        !inputPartidaEliminaciones.value
+    ) {
 
-        await fetchAPI(
-            '/api/fortnite/partidas',
-            {
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({
-                    jugador_id:
-                        parseInt(selectPartidaJugador.value),
-
-                    eliminaciones:
-                        parseInt(inputPartidaEliminaciones.value),
-
-                    victoria:
-                        selectPartidaVictoria.value === 'true'
-                })
-            }
+        mostrarNotificacion(
+            'Completa todos los campos',
+            'error'
         );
 
+        return;
+    }
+
+    const datos = {
+
+        jugador_id:
+            parseInt(selectPartidaJugador.value),
+
+        eliminaciones:
+            parseInt(inputPartidaEliminaciones.value),
+
+        victoria:
+            selectPartidaVictoria.value === 'true'
+
+    };
+
+    try {
+
+        if(inputPartidaId.value){
+
+            await fetchAPI(
+                `/api/fortnite/partidas/${inputPartidaId.value}`,
+                {
+                    method:'PUT',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify(datos)
+                }
+            );
+
+            mostrarNotificacion(
+                'Partida actualizada',
+                'exito'
+            );
+
+        } else {
+
+            await fetchAPI(
+                '/api/fortnite/partidas',
+                {
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify(datos)
+                }
+            );
+
+            mostrarNotificacion(
+                'Partida creada',
+                'exito'
+            );
+
+        }
+
         formPartida.reset();
+        inputPartidaId.value = '';
 
         cargarPartidas();
 
@@ -910,7 +1023,6 @@ formPartida.addEventListener('submit', async (e)=>{
     }
 
 });
-
 // ============================================================
 // 6. INICIALIZACIÓN
 // ============================================================

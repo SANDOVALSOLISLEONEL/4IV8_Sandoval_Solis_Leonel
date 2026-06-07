@@ -70,6 +70,23 @@ app.get('/api', (req, res) => {
                 actualizar : 'PUT /api/compras/:id',
                 eliminar : 'DELETE /api/compras/:id'
             }
+            ,
+
+fortnite : {
+    jugadores : {
+        listar : 'GET /api/fortnite/jugadores',
+        obtener : 'GET /api/fortnite/jugadores/:id',
+        crear : 'POST /api/fortnite/jugadores',
+        actualizar : 'PUT /api/fortnite/jugadores/:id',
+        eliminar : 'DELETE /api/fortnite/jugadores/:id'
+    },
+    partidas : {
+        listar : 'GET /api/fortnite/partidas',
+        crear : 'POST /api/fortnite/partidas',
+        actualizar : 'PUT /api/fortnite/partidas/:id',
+        eliminar : 'DELETE /api/fortnite/partidas/:id'
+    }
+}
 
         }
     });

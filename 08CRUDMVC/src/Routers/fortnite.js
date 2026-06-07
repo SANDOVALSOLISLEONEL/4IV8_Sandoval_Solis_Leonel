@@ -15,11 +15,16 @@ router.get('/jugadores', async (req, res) => {
         });
 
     } catch (error) {
-        res.status(500).json({
-            status: 'error',
-            message: error.message
-        });
-    }
+
+    console.log('ERROR FORTNITE');
+    console.log(error);
+
+    res.status(500).json({
+        status:'error',
+        message:error.message,
+        error:error
+    });
+}
 });
 
 router.get('/jugadores/:id', async (req, res) => {
@@ -94,8 +99,13 @@ router.put('/jugadores/:id', async (req, res) => {
     }
 });
 
+
 router.delete('/jugadores/:id', async (req, res) => {
     try {
+        await db.execute(
+    'DELETE FROM fortnite_partidas WHERE jugador_id=?',
+    [req.params.id]
+);
 
         await db.execute(
             'DELETE FROM fortnite_jugadores WHERE id=?',
@@ -119,11 +129,12 @@ router.get('/partidas', async (req, res) => {
 
         const [data] = await db.execute(`
             SELECT
-                p.id,
-                j.nombre jugador,
-                p.eliminaciones,
-                p.victoria,
-                p.fecha_partida
+             p.id,
+             p.jugador_id,
+            j.nombre jugador,
+            p.eliminaciones,
+            p.victoria,
+            p.fecha_partida
             FROM fortnite_partidas p
             INNER JOIN fortnite_jugadores j
             ON p.jugador_id=j.id

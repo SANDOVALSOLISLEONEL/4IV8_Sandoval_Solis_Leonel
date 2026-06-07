@@ -179,94 +179,103 @@
             </section>
         </div>
 
-        <!-- Notificaciones -->
-        <div id="notificacion" class="notificacion" style="display:none;"></div>
-<div id="seccion-fortnite" class="seccion" style="display:none;"> <h2>Jugadores</h2>
+<!-- Notificaciones -->
+<div id="notificacion" class="notificacion" style="display:none;"></div>
 
-<form id="form-jugador">
+<div id="seccion-fortnite" class="seccion" style="display:none;">
 
-    <input type="hidden" id="jugador-id">
+    <section class="formulario-section">
+        <h2>Agregar Jugador</h2>
+        <form id="form-jugador" novalidate>
+            <input type="hidden" id="jugador-id">
+            <div class="campos-grid">
+                <div class="campo">
+                    <label for="jugador-nombre">Nombre del jugador:</label>
+                    <input type="text" id="jugador-nombre" placeholder="Ej: Ninja" maxlength="100" required>
+                </div>
+                <div class="campo">
+                    <label for="jugador-nivel">Nivel:</label>
+                    <input type="number" id="jugador-nivel" placeholder="Ej: 10" min="1" required>
+                </div>
+            </div>
+            <div class="botones">
+                <button type="submit" id="btn-guardar-jugador">Guardar</button>
+                <button type="button" id="btn-cancelar-jugador" class="btn-secundario" style="display:none;">Cancelar</button>
+            </div>
+        </form>
+    </section>
 
-    <input
-        type="text"
-        id="jugador-nombre"
-        placeholder="Nombre"
-    >
+    <section class="tabla-section">
+        <h2>Jugadores <span id="contador-jugadores" class="badge badge-neutral"></span></h2>
+        <p id="carga-jugadores">Cargando...</p>
+        <table id="tabla-jugadores" style="display:none;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Nivel</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-jugadores"></tbody>
+        </table>
+    </section>
 
-    <input
-        type="number"
-        id="jugador-nivel"
-        placeholder="Nivel"
-    >
+    <section class="formulario-section">
+        <h2>Registrar Partida</h2>
+        <form id="form-partida" novalidate>
+            <input type="hidden" id="partida-id">
+            <div class="campos-grid campos-grid-3">
+                <div class="campo">
+                    <label for="partida-jugador">Jugador:</label>
+                    <select id="partida-jugador" required>
+                        <option value="">-- Seleccionar jugador --</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <label for="partida-eliminaciones">Eliminaciones:</label>
+                    <input type="number" id="partida-eliminaciones" placeholder="Ej: 5" min="0" required>
+                </div>
+                <div class="campo">
+                    <label for="partida-victoria">Resultado:</label>
+                    <select id="partida-victoria">
+                        <option value="true">Victoria</option>
+                        <option value="false">Derrota</option>
+                    </select>
+                </div>
+            </div>
+            <div class="botones">
+                <button type="submit" id="btn-guardar-partida">Guardar</button>
+            </div>
+        </form>
+    </section>
 
-    <button type="submit">
-        Guardar
-    </button>
+    <section class="tabla-section">
+        <h2>Partidas <span id="contador-partidas" class="badge badge-neutral"></span></h2>
+        <p id="carga-partidas">Cargando...</p>
+        <table id="tabla-partidas" style="display:none;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Jugador</th>
+                    <th>Eliminaciones</th>
+                    <th>Victoria</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-partidas"></tbody>
+        </table>
+    </section>
 
-</form>
-
-<table id="tabla-jugadores">
-
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Nivel</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-
-    <tbody id="tbody-jugadores"></tbody>
-
-</table>
-
-                <h2>Partidas</h2>
-
-<form id="form-partida">
-
-    <select id="partida-jugador"></select>
-
-    <input
-        type="number"
-        id="partida-eliminaciones"
-        placeholder="Eliminaciones"
-    >
-
-    <select id="partida-victoria">
-        <option value="true">Victoria</option>
-        <option value="false">Derrota</option>
-    </select>
-
-    <button type="submit">
-        Guardar
-    </button>
-
-</form>
-
-<table id="tabla-partidas">
-
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Jugador</th>
-            <th>Eliminaciones</th>
-            <th>Victoria</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-
-    <tbody id="tbody-partidas"></tbody>
-
-</table>
 </div>
 
+</main>
 
-    </main>
+<footer>
+    <p>PNT — Práctica 3: Express + CORS + Relaciones MySQL</p>
+</footer>
 
-    <footer>
-        <p>PNT — Práctica 3: Express + CORS + Relaciones MySQL</p>
-    </footer>
+<script src="./js/app.js"></script>
 
-    <script src="./js/app.js"></script>
 </body>
 </html>
