@@ -629,6 +629,10 @@ const selectPartidaJugador = document.getElementById('partida-jugador');
 const inputPartidaEliminaciones = document.getElementById('partida-eliminaciones');
 const selectPartidaVictoria = document.getElementById('partida-victoria');
 const tbodyPartidas = document.getElementById('tbody-partidas');
+const tablaJugadores = document.getElementById('tabla-jugadores');
+const cargaJugadores = document.getElementById('carga-jugadores');
+const tablaPartidas = document.getElementById('tabla-partidas');
+const cargaPartidas2 = document.getElementById('carga-partidas');
 
 // ==================== JUGADORES ====================
 
@@ -637,17 +641,16 @@ async function cargarJugadores() {
     try {
 
         const resp = await fetchAPI('/api/fortnite/jugadores');
-
+        if (cargaJugadores) cargaJugadores.style.display = 'none';
         tbodyJugadores.innerHTML = '';
 
-        if (resp.data.length === 0) {
-
+if (resp.data.length === 0) {
+            tablaJugadores.style.display = 'none';
             tbodyJugadores.innerHTML = `
                 <tr>
                     <td colspan="4">No hay jugadores registrados</td>
                 </tr>
             `;
-
             cargarSelectJugadores();
             return;
         }
@@ -676,6 +679,7 @@ async function cargarJugadores() {
             tbodyJugadores.appendChild(fila);
 
         });
+        tablaJugadores.style.display = 'table';
 
         cargarSelectJugadores();
 
@@ -841,11 +845,11 @@ async function cargarPartidas() {
 
         const resp =
             await fetchAPI('/api/fortnite/partidas');
-
+        if (cargaPartidas2) cargaPartidas2.style.display = 'none';
         tbodyPartidas.innerHTML='';
 
         if(resp.data.length === 0){
-
+            tablaPartidas.style.display = 'none';
             tbodyPartidas.innerHTML = `
                 <tr>
                     <td colspan="5">
@@ -853,10 +857,8 @@ async function cargarPartidas() {
                     </td>
                 </tr>
             `;
-
             return;
         }
-
         resp.data.forEach(p => {
 
             const fila =
@@ -883,7 +885,7 @@ async function cargarPartidas() {
             tbodyPartidas.appendChild(fila);
 
         });
-
+        tablaPartidas.style.display = 'table';
     } catch(error) {
 
         mostrarNotificacion(error.message,'error');
