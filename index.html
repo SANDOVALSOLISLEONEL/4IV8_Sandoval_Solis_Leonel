@@ -1,18 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portafolio de evidencias</title>
+    <title>Portafolio de Evidencias — Sandoval Solis Leonel</title>
+    <link rel="stylesheet" href="./css/style.css">
+    
 </head>
 <body>
-    <p>Este es el portafolio de evidencias de Sandoval Solis Leonel</p>
-    <p>aqui va tu lista real</p>
-    <li>
-        <ol><a href="./01PrimeraPractica/inicio.html">vamos al inicio</a></ol>
-        <ol><a href="./tareas/cuestionarios.html">ejercicios JS 1</a></ol>
-        <ol><a href="./01PrimeraPractica/02formulario/formulario.html">formulario de 3 componentes</a></ol>
-        <ol><a href="./04algoritmis/algoritmia.html">ejercicios algoritmia</a></ol>
-    </li>
+
+<div class="portfolio-wrapper">
+
+    <!-- ══════════════════════════════════
+         CARÁTULA
+    ══════════════════════════════════ -->
+    <div class="caratula">
+        <img class="caratula-escudo" src="./img/poli_rojo_fondo.jpeg" alt="Logo IPN">
+        <h1>Portafolio de Evidencias</h1>
+        <p class="subtitulo">Programación Web &nbsp;|&nbsp; Instituto Politécnico Nacional</p>
+
+        <div class="datos-grid">
+            <div class="dato-item">
+                <span>Nombre</span>
+                <strong>Sandoval Solis Leonel</strong>
+            </div>
+            <div class="dato-item">
+                <span>Grupo</span>
+                <strong>4IV8</strong>
+            </div>
+            <div class="dato-item">
+                <span>Boleta</span>
+                <strong class="boleta-placeholder">2025090219</strong>
+            </div>
+            <div class="dato-item">
+                <span>Período escolar</span>
+                <strong>2025 - 2026</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="seccion">
+        <h2>Objetivo del portafolio</h2>
+        <p>
+            Este portafolio tiene como propósito concentrar y mostrar las prácticas desarrolladas
+            a lo largo de la materia de Programación Web, evidenciando el proceso de aprendizaje
+            progresivo desde la estructura básica de una página HTML hasta la construcción de
+            sistemas con arquitectura cliente-servidor, bases de datos y patrones MVC.
+            Cada práctica representa un avance concreto en el dominio de tecnologías web modernas.
+        </p>
+    </div>
+
+    <div class="seccion">
+        <h2>Elementos aprendidos en la materia</h2>
+        <ul class="aprendizajes-lista">
+            <li>Estructura semántica de HTML5: uso de etiquetas <code>header</code>, <code>nav</code>, <code>section</code>, <code>article</code>, <code>aside</code> y <code>footer</code></li>
+            <li>Diseño y estilizado con CSS3: modelo de caja, selectores, posicionamiento y guía de estilos personalizada</li>
+            <li>Formularios HTML con validación del lado del cliente mediante JavaScript</li>
+            <li>Fundamentos de JavaScript: variables, funciones, eventos y manipulación del DOM</li>
+            <li>Resolución de problemas algorítmicos con JavaScript: inversión de palabras, producto escalar y caracteres únicos</li>
+            <li>Funciones avanzadas en JavaScript: parámetros, retorno de valores y reutilización de código</li>
+            <li>Desarrollo de un juego interactivo (rompecabezas) con manejo de eventos y lógica de tablero</li>
+            <li>Arquitectura cliente-servidor: creación de una API REST básica con Node.js y Express</li>
+            <li>Patrón MVC con Express, MySQL y manejo de rutas para múltiples entidades (usuarios, productos, compras)</li>
+        </ul>
+    </div>
+
+    <div class="seccion">
+        <h2>Prácticas realizadas</h2>
+        <ul class="practicas-grid">
+
+            <li class="practica-card">
+                <a href="./01PrimeraPractica/inicio.html">
+                    <p class="practica-num">Práctica 01</p>
+                    <span class="practica-nombre">Página personal — Estructura HTML semántica</span>
+                </a>
+            </li>
+
+            <li class="practica-card">
+                <a href="./tareas/cuestionarios.html">
+                    <p class="practica-num">Práctica 02 / Tarea</p>
+                    <span class="practica-nombre">Ejercicios JS — Cálculo de interés</span>
+                </a>
+            </li>
+
+            <li class="practica-card">
+                <a href="./01PrimeraPractica/02formulario/formulario.html">
+                    <p class="practica-num">Práctica 03</p>
+                    <span class="practica-nombre">Formulario con validación en JavaScript</span>
+                </a>
+            </li>
+
+            <li class="practica-card">
+                <a href="./04algoritmis/algoritmia.html">
+                    <p class="practica-num">Práctica 04</p>
+                    <span class="practica-nombre">Ejercicios de algoritmia</span>
+                </a>
+            </li>
+
+            <li class="practica-card">
+                <a href="./05 funciones/funciones.js">
+                    <p class="practica-num">Práctica 05</p>
+                    <span class="practica-nombre">Funciones en JavaScript</span>
+                </a>
+            </li>
+
+            <li class="practica-card">
+                <a href="./06 Rompecabezas/rompecabezas.html">
+                    <p class="practica-num">Práctica 06</p>
+                    <span class="practica-nombre">Rompecabezas interactivo</span>
+                </a>
+            </li>
+
+            <li class="practica-card">
+                <a href="./07CRUD/public/index.html">
+                    <p class="practica-num">Práctica 07</p>
+                    <span class="practica-nombre">CRUD de usuarios con Node.js y Express</span>
+                    <span class="badge-sin-servidor">⚠ No funcional sin el servidor local</span>
+                </a>
+            </li>
+
+            <li class="practica-card">
+                <a href="./08CRUDMVC/public/index.html">
+                    <p class="practica-num">Práctica 08</p>
+                    <span class="practica-nombre">CRUD MVC — Express + MySQL + Relaciones</span>
+                    <span class="badge-sin-servidor">⚠ No funcional sin el servidor local</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+</div>
+
 </body>
 </html>
